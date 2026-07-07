@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Carnets de Vacunación Canina y Felina</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <img src="logo.png" style="max-height: 80px;">
+                <h1>DOCAM</h1>
+            </div>
+            <p class="subtitle">Generador de Carnets de Vacunación</p>
+        </header>
+
+        <!-- MODULO 1: FORMULARIO DE REGISTRO -->
+        <main id="form-view" class="view-panel active">
+            <form id="carnet-form" novalidate>
+                <div class="form-grid">
+                    <!-- PARTE FRONTAL: Datos de la Mascota -->
+                    <section class="form-section">
+                        <div class="section-header">
+                            <span class="step-badge">1</span>
+                            <h2>Datos de la Mascota (Parte Frontal)</h2>
+                        </div>
+                        
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="pet-register">Nº de Registro <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-hashtag input-icon"></i>
+                                    <input type="text" id="pet-register" placeholder="Ej. REG-2026-09" required>
+                                </div>
+                                <span class="error-msg" id="error-pet-register">Este campo es requerido</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="pet-name">Nombre de la Mascota <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-paw input-icon"></i>
+                                    <input type="text" id="pet-name" placeholder="Ej. Toby" required>
+                                </div>
+                                <span class="error-msg" id="error-pet-name">Este campo es requerido</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="pet-breed">Raza <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-dog input-icon"></i>
+                                    <input type="text" id="pet-breed" placeholder="Ej. Golden Retriever" required>
+                                </div>
+                                <span class="error-msg" id="error-pet-breed">Este campo es requerido</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="pet-color">Color <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-palette input-icon"></i>
+                                    <input type="text" id="pet-color" placeholder="Ej. Dorado / Crema" required>
+                                </div>
+                                <span class="error-msg" id="error-pet-color">Este campo es requerido</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="pet-birthdate">Fecha de Nacimiento <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-calendar-days input-icon"></i>
+                                    <input type="date" id="pet-birthdate" required>
+                                </div>
+                                <span class="error-msg" id="error-pet-birthdate">Selecciona una fecha válida</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pet-gender">Sexo <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-venus-mars input-icon"></i>
+                                    <select id="pet-gender" required>
+                                        <option value="" disabled selected>Seleccionar...</option>
+                                        <option value="Macho">Macho</option>
+                                        <option value="Hembra">Hembra</option>
+                                    </select>
+                                </div>
+                                <span class="error-msg" id="error-pet-gender">Seleccione el sexo</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="pet-size">Tamaño <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-up-right-and-down-left-from-center input-icon"></i>
+                                    <select id="pet-size" required>
+                                        <option value="" disabled selected>Seleccionar...</option>
+                                        <option value="Pequeño">Pequeño</option>
+                                        <option value="Mediano">Mediano</option>
+                                        <option value="Grande">Grande</option>
+                                        <option value="Gigante">Gigante</option>
+                                    </select>
+                                </div>
+                                <span class="error-msg" id="error-pet-size">Seleccione el tamaño</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pet-emission">Fecha de Emisión</label>
+                                <div class="input-wrapper disabled">
+                                    <i class="fa-solid fa-file-signature input-icon"></i>
+                                    <input type="text" id="pet-emission" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Foto de la Mascota <span class="required">*</span></label>
+                            <div class="upload-dropzone" id="photo-dropzone">
+                                <input type="file" id="pet-photo" accept="image/*" required hidden>
+                                <div class="dropzone-content" id="dropzone-content-default">
+                                    <i class="fa-solid fa-camera-retro dropzone-icon"></i>
+                                    <p class="dropzone-text">Arrastra la foto aquí o <span>haz clic para buscar</span></p>
+                                    <p class="dropzone-subtext">Formatos recomendados: JPG, PNG (Max 5MB)</p>
+                                </div>
+                                <div class="dropzone-preview hidden" id="dropzone-preview-container">
+                                    <img id="photo-preview-img" src="" alt="Previsualización">
+                                    <button type="button" class="btn-remove-photo" id="btn-remove-photo" title="Eliminar foto">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <span class="error-msg" id="error-pet-photo">Por favor cargue una foto de la mascota</span>
+                        </div>
+                    </section>
+
+                    <!-- PARTE TRASERA: Datos del Propietario e Información Médica -->
+                    <section class="form-section">
+                        <div class="section-header">
+                            <span class="step-badge">2</span>
+                            <h2>Datos del Propietario & Salud (Parte Trasera)</h2>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="owner-name">Nombres y Apellidos del Propietario <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-user input-icon"></i>
+                                <input type="text" id="owner-name" placeholder="Ej. Juan Pérez García" required>
+                            </div>
+                            <span class="error-msg" id="error-owner-name">Este campo es requerido</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="owner-address">Dirección del Propietario <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-location-dot input-icon"></i>
+                                <input type="text" id="owner-address" placeholder="Ej. Av. Larco 123, Miraflores" required>
+                            </div>
+                            <span class="error-msg" id="error-owner-address">Este campo es requerido</span>
+                        </div>
+
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="owner-dni">DNI del Propietario <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-id-card input-icon"></i>
+                                    <input type="text" id="owner-dni" placeholder="Ej. 12345678" pattern="[0-9]{8}" maxlength="8" required>
+                                </div>
+                                <span class="error-msg" id="error-owner-dni">Debe ingresar un DNI de 8 dígitos</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="owner-phone">Celular del Propietario <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-mobile-screen-button input-icon"></i>
+                                    <input type="text" id="owner-phone" placeholder="Ej. 987654321" pattern="[0-9]{9,15}" maxlength="12" required>
+                                </div>
+                                <span class="error-msg" id="error-owner-phone">Debe ingresar un celular válido (mín. 9 dígitos)</span>
+                            </div>
+                        </div>
+
+                        <!-- Checkboxes / Switches de Estado -->
+                        <div class="health-checks">
+                            <h3>Información y Estado de Salud</h3>
+                            
+                            <div class="switch-group">
+                                <div class="switch-info">
+                                    <span class="switch-label">Vacunación Antirrábica</span>
+                                    <span class="switch-desc">¿Cuenta con la vacuna contra la rabia vigente?</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="vac-rabies">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="switch-group">
+                                <div class="switch-info">
+                                    <span class="switch-label">Vacunación Completa</span>
+                                    <span class="switch-desc">¿Tiene su cartilla de vacunación al día?</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="vac-complete">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="switch-group">
+                                <div class="switch-info">
+                                    <span class="switch-label">¿Es Agresivo?</span>
+                                    <span class="switch-desc">¿Muestra comportamiento hostil hacia otros o personas?</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="pet-aggressive">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <i class="fa-solid fa-circle-check"></i> Registrar y Generar Carnet
+                    </button>
+                </div>
+            </form>
+        </main>
+
+        <!-- MODULO 2: CARNET GENERADO Y DESCARGA -->
+        <main id="preview-view" class="view-panel">
+            <div class="preview-header">
+                <h2>¡Carnet Generado Correctamente!</h2>
+                <p>Aquí puedes visualizar cómo quedó el carnet de vacunación y descargarlo en alta resolución.</p>
+            </div>
+
+            <!-- Carnet Container for rendering -->
+            <div class="cards-display-container">
+                <!-- PARTE FRONTAL -->
+                <div class="card-wrapper">
+                    <h3>Vista Frontal</h3>
+                    <div id="card-render-front" class="card-render">
+                        <img src="FrontCarnet.png" class="card-background" alt="Fondo Frontal">
+                        <!-- Overlays -->
+                        <div class="card-photo-container" id="card-photo-slot">
+                            <!-- uploaded image will go here -->
+                        </div>
+                        <div class="card-field field-register" id="card-val-register"></div>
+                        <div class="card-field field-name" id="card-val-name"></div>
+                        <div class="card-field field-breed" id="card-val-breed"></div>
+                        <div class="card-field field-color" id="card-val-color"></div>
+                        <div class="card-field field-birthdate" id="card-val-birthdate"></div>
+                        <div class="card-field field-gender" id="card-val-gender"></div>
+                        <div class="card-field field-size" id="card-val-size"></div>
+                        <div class="card-field field-emission" id="card-val-emission"></div>
+                    </div>
+                </div>
+
+                <!-- PARTE TRASERA -->
+                <div class="card-wrapper">
+                    <h3>Vista Trasera</h3>
+                    <div id="card-render-back" class="card-render">
+                        <img src="BackCarnet.png" class="card-background" alt="Fondo Trasero">
+                        <!-- Overlays -->
+                        <div class="card-field field-owner" id="card-val-owner"></div>
+                        <div class="card-field field-address" id="card-val-address"></div>
+                        <div class="card-field field-dni" id="card-val-dni"></div>
+                        <div class="card-field field-phone" id="card-val-phone"></div>
+
+                        <!-- Checkbox positions (overlay SI or NO) -->
+                        <div class="card-mark mark-rabies-si" id="card-val-rabies-si"></div>
+                        <div class="card-mark mark-rabies-no" id="card-val-rabies-no"></div>
+                        
+                        <div class="card-mark mark-complete-si" id="card-val-complete-si"></div>
+                        <div class="card-mark mark-complete-no" id="card-val-complete-no"></div>
+                        
+                        <div class="card-mark mark-aggressive-si" id="card-val-aggressive-si"></div>
+                        <div class="card-mark mark-aggressive-no" id="card-val-aggressive-no"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="action-buttons-group">
+                <button type="button" class="btn btn-secondary" id="btn-edit-data">
+                    <i class="fa-solid fa-pen-to-square"></i> Modificar Datos
+                </button>
+                <div class="download-dropdown-container">
+                    <button type="button" class="btn btn-primary" id="btn-download-img">
+                        <i class="fa-solid fa-image"></i> Descargar Imagenes (PNG)
+                    </button>
+                    <button type="button" class="btn btn-accent" id="btn-download-pdf">
+                        <i class="fa-solid fa-file-pdf"></i> Descargar PDF (Tamaño Carnet)
+                    </button>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="app-footer">
+            <p>&copy; 2026 Ediczon C.M.M. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- html2canvas Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Application Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
